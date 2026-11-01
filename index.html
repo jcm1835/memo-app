@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>메모장</title>
+<meta name="theme-color" content="#2383e2">
+<meta name="description" content="노션처럼 깔끔한 메모장">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="메모장">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <style>
   :root {
     --bg: #ffffff; --side: #f7f6f3; --hover: #ebeae6; --active: #e3e2de;
@@ -219,6 +227,10 @@
   }
   if (matchMedia('(min-width: 721px)').matches && notes.length) currentId = [...notes].sort((a, b) => b.updated - a.updated)[0].id;
   renderAll();
+
+  if ('serviceWorker' in navigator) {
+    addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  }
 })();
 </script>
 </body>
